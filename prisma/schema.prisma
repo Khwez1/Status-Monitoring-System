@@ -1,0 +1,22 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Incident {
+  id String @id @default(cuid())
+  status String // "DOWN" | "OPERATIONAL" | "DEGRADED"
+  startTime DateTime
+  endTime DateTime?
+  message String
+  createdAt DateTime @default(now())
+}
