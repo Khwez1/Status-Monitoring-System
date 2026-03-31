@@ -14,9 +14,25 @@ datasource db {
 
 model Incident {
   id String @id @default(cuid())
-  status String // "DOWN" | "OPERATIONAL" | "DEGRADED"
+  status String // "Identified" | "Resloved" | 
   startTime DateTime
   endTime DateTime?
   message String
+  resolution String?
+  createdAt DateTime @default(now())
+}
+
+model Check {
+  id        String   @id @default(cuid())
+  url       String
+  status    Int
+  latencyMs Int
+  ok        Boolean
+  checkedAt DateTime @default(now())
+}
+
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
   createdAt DateTime @default(now())
 }
