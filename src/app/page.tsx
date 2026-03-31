@@ -24,6 +24,7 @@ const HomePage = async () => {
     orderBy: { checkedAt: "asc" },
   });
 
+  
   return (
     <div className="relative container mx-auto p-6">
       <StatusHeader />
