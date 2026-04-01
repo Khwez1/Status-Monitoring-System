@@ -23,7 +23,7 @@ const UptimeHistory = ({ checks }: Props) => {
 
     if (blockChecks.length === 0) return "EMPTY";
 
-    const hasDown = blockChecks.some((c) => !c.ok && c.latencyMs === 0);
+    const hasDown = blockChecks.some((c) => !c.ok);
     const hasDegraded = blockChecks.some(
       (c) => c.ok && c.latencyMs > 1000
     );
