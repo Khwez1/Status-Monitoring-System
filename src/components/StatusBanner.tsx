@@ -8,12 +8,12 @@ interface Props {
 
 export const StatusBanner = ({ latestCheck, activeIncident }: Props) => {
   const status = !latestCheck
-    ? "UNKNOWN"
-    : activeIncident?.status === "DOWN"
-    ? "DOWN"
-    : activeIncident?.status === "DEGRADED"
+  ? "UNKNOWN"
+  : activeIncident && activeIncident.status !== "RESOLVED"
+  ? latestCheck.ok
     ? "DEGRADED"
-    : "OPERATIONAL";
+    : "DOWN"
+  : "OPERATIONAL";
 
   const config = {
     OPERATIONAL: {
