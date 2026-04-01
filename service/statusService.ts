@@ -14,7 +14,12 @@ export async function checkSite() {
 
   try {
     const start = Date.now();
-    const res = await fetch(MONITOR_URL);
+    const res = await fetch(MONITOR_URL, {
+      headers: {
+        "User-Agent":
+        "Mozilla/5.0 (compatible; UptimeMonitor/1.0; +https://status-monitoring-system.vercel.app)"
+      }
+    });
     latencyMs = Date.now() - start;
     httpStatus = res.status;
 
