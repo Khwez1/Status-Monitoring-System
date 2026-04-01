@@ -3,7 +3,6 @@
 import prisma from '@/db/prisma';
 import { Resend } from 'resend';
 import { Incident } from '@/generated/prisma/client';
-import { EmailTemplate } from '@/components/EmailTemplate';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -35,10 +34,25 @@ export async function sendEmail(
       from: 'Test <onboarding@resend.dev>',
       to: emails,
       subject,
-      react: EmailTemplate({
-        message,
-        status: status
-      })
+      html: `
+        <div style="font-family: serif; max-width: 600px; margin: 0 auto; padding: 24px;">
+          <p style="padding-top: 16px; border-top: 1px solid #e5e7eb;">
+            Hi, subscriber!
+          </p>
+          <p>
+            ${message}
+            <br />
+            <strong>Status:</strong>
+            <span style="font-weight: bold;">
+              ${status}
+            </span>
+          </p>
+          <br />
+          <p style="padding-top: 16px; border-top: 1px solid #e5e7eb;">
+            Best regards,<br />Downtime
+          </p>
+        </div>
+      `,
     });
 
     if (error) {
