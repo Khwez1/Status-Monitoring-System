@@ -6,6 +6,8 @@ import StatusHeader from "@/components/StatusHeader";
 import { getIncidents } from "../../service/incidentService";
 import UptimeHistory from "@/components/UptimeHistory";
 
+export const revalidate = 30;
+
 const HomePage = async () => {
   const incidents = await getIncidents();
 

@@ -11,9 +11,8 @@ export function EmailTemplate({ status, message }: EmailTemplateProps) {
         ${message}
         <br />
         <strong>Status:</strong> ${status}
-        <br />
-        <strong>Time:</strong> ${new Date().toISOString()}
       </p>
+        <br />
       <p className='pt-4 border-t'>Best regards,<br /> Downtime</p>
     </div>
   );
