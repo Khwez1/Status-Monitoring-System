@@ -32,7 +32,7 @@ export async function sendEmail(
 
   try {
     const { error } = await resend.emails.send({
-      from: `<${process.env.EMAIL_FROM}>` || '<onboarding@resnd.dev',
+      from: 'Test <onboarding@resnd.dev>',
       to: emails,
       subject,
       react: EmailTemplate({

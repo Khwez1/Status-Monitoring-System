@@ -23,8 +23,11 @@ const IncidentsList = ({incidents}: Props) => {
               {/* Left Side */}
               <div>
                 <h2 className="text-xl font-semibold text-blue-600">
-                  {new Date(incident.createdAt).toLocaleString()}
+                  {incident.message}
                 </h2>
+                <p className="font-semibold text-gray-600">
+                  {new Date(incident.createdAt).toLocaleString()}
+                </p>
               </div>
               {/* Right Side */}
               <div className="text-right space-y-2">
