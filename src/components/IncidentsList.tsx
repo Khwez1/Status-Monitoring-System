@@ -14,7 +14,7 @@ const IncidentsList = ({incidents}: Props) => {
       {incidents.length === 0 ? (
         <p className="text-center text-gray-600"></p>
       ) : (
-        <div className="space-y-4 max-w-3xl mx-auto">
+        <div className="space-y-4 w-full mx-auto">
           {incidents.map((incident) => (
             <div
               key={incident.id}
