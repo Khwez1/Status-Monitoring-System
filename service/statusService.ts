@@ -4,7 +4,7 @@ import prisma from "@/db/prisma";
 import { createIncident, resolveIncident } from "./incidentService";
 import { sendEmail } from "./emailService";
 
-const MONITOR_URL = "https://paveer.com";
+const MONITOR_URL = "https://httpstat.us/503";
 const DEGRADED_THRESHOLD_MS = 1000;
 
 export async function checkSite() {
