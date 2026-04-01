@@ -1,0 +1,20 @@
+// components/AutoRefresh.tsx
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
+const AutoRefresh = ({ interval = 30000 }: { interval?: number }) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      router.refresh();
+    }, interval);
+
+    return () => clearInterval(timer);
+  }, [router, interval]);
+
+  return null;
+};
+
+export default AutoRefresh;
