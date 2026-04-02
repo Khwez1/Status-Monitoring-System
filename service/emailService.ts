@@ -30,10 +30,10 @@ export async function sendEmail(
     ? `The site recovered at ${formatDateTime(new Date())}. It was down since ${formatDateTime(incident.startTime)}.`
     : `${incident.message}. Incident started at ${formatDateTime(incident.startTime)}.`
   ;
-  
+
   try {
     const { error } = await resend.emails.send({
-      from: 'Test <onboarding@resend.dev>',
+      from: `Test <${process.env.EMAIL_FROM}>`,
       to: emails,
       subject,
       html: `
