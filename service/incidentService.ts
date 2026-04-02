@@ -1,4 +1,3 @@
-// service/incidentService.ts
 "use server";
 import prisma from "@/db/prisma";
 import { Incident } from "@/generated/prisma/client";

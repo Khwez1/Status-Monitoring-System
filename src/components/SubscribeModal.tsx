@@ -1,4 +1,3 @@
-// components/SubscribeModal.tsx
 "use client";
 import { useState } from "react";
 

@@ -1,10 +1,9 @@
 "use server";
-/// service/statusService.ts
 import prisma from "@/db/prisma";
 import { createIncident, resolveIncident } from "./incidentService";
 import { sendEmail } from "./emailService";
 
-const MONITOR_URL = "https://paveer.com";
+const MONITOR_URL = "https://httpstat.us/200?sleep=2000";
 const DEGRADED_THRESHOLD_MS = 1000;
 
 export async function checkSite() {
@@ -47,7 +46,7 @@ export async function checkSite() {
     where: { endTime: null },
   });
 
-  // 🔴 Site just went DOWN or DEGRADED
+  // Site just went DOWN or DEGRADED
   if (currentStatus !== "OPERATIONAL" && !activeIncident) {
     const message =
       currentStatus === "DEGRADED"
@@ -56,15 +55,11 @@ export async function checkSite() {
 
     const incident = await createIncident(currentStatus, message, httpStatus);
     await sendEmail(currentStatus, incident);
-
-    console.log(`🚨 Incident created: ${currentStatus}`);
   }
 
-  // 🟢 Site just recovered
+  // Site just recovered
   if (currentStatus === "OPERATIONAL" && activeIncident) {
     const resolved = await resolveIncident(activeIncident);
     await sendEmail("RECOVERED", resolved);
-
-    console.log("✅ Incident resolved");
   }
 }

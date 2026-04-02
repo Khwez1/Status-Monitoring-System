@@ -1,4 +1,3 @@
-// app/api/unsubscribe/route.ts
 import prisma from "@/db/prisma";
 
 export async function POST(request: Request) {

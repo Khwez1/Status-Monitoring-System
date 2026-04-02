@@ -1,7 +1,5 @@
-// components/StatusHeader.tsx
 "use client";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { FaChartLine } from "react-icons/fa6";
 import SubscribeModal from "./SubscribeModal";
 

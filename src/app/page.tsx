@@ -1,4 +1,3 @@
-// app/page.tsx
 import prisma from "@/db/prisma";
 import IncidentsList from "@/components/IncidentsList";
 import StatusBanner from "@/components/StatusBanner";

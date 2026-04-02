@@ -1,4 +1,3 @@
-// components/UptimeHistory.tsx
 import { Check } from "@/generated/prisma/client";
 
 interface Props {

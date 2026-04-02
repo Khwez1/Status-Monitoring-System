@@ -3,6 +3,7 @@
 import prisma from '@/db/prisma';
 import { Resend } from 'resend';
 import { Incident } from '@/generated/prisma/client';
+import { formatDateTime } from '@/utils/date';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -25,10 +26,11 @@ export async function sendEmail(
     "🟢 Site has recovered";
 
   const message =
-    status === "RECOVERED"
-      ? `The site recovered at ${new Date().toISOString()}. It was down since ${incident.startTime.toISOString()}.`
-      : `${incident.message}. Incident started at ${incident.startTime.toISOString()}.`;
-
+  status === "RECOVERED"
+    ? `The site recovered at ${formatDateTime(new Date())}. It was down since ${formatDateTime(incident.startTime)}.`
+    : `${incident.message}. Incident started at ${formatDateTime(incident.startTime)}.`
+  ;
+  
   try {
     const { error } = await resend.emails.send({
       from: 'Test <onboarding@resend.dev>',

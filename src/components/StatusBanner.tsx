@@ -1,5 +1,5 @@
-// components/StatusBanner.tsx
 import { Check, Incident } from "@/generated/prisma/client";
+import { formatDateTime } from "@/utils/date";
 
 interface Props {
   latestCheck: Check | null;
@@ -8,12 +8,12 @@ interface Props {
 
 export const StatusBanner = ({ latestCheck, activeIncident }: Props) => {
   const status = !latestCheck
-  ? "UNKNOWN"
-  : activeIncident && activeIncident.status !== "RESOLVED"
-  ? latestCheck.ok
-    ? "DEGRADED"
-    : "DOWN"
-  : "OPERATIONAL";
+    ? "UNKNOWN"
+    : activeIncident && activeIncident.status !== "RESOLVED"
+    ? latestCheck.ok
+      ? "DEGRADED"
+      : "DOWN"
+    : "OPERATIONAL";
 
   const config = {
     OPERATIONAL: {
@@ -53,7 +53,6 @@ export const StatusBanner = ({ latestCheck, activeIncident }: Props) => {
   return (
     <div className={`my-8 p-6 rounded-lg border ${config.bg} ${config.border}`}>
       <div className="flex items-center gap-3">
-        {/* Pulsing dot */}
         <span className="relative flex h-3 w-3">
           <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${config.dot}`} />
           <span className={`relative inline-flex rounded-full h-3 w-3 ${config.dot}`} />
@@ -63,7 +62,7 @@ export const StatusBanner = ({ latestCheck, activeIncident }: Props) => {
       <p className={`mt-2 text-sm ${config.text} opacity-80`}>{config.subtitle}</p>
       {latestCheck && (
         <p className="mt-3 text-xs text-gray-400">
-          Last checked: {new Date(latestCheck.checkedAt).toLocaleString()} —{" "}
+          Last checked: {formatDateTime(latestCheck.checkedAt)} —{" "}
           {latestCheck.latencyMs}ms response time
         </p>
       )}

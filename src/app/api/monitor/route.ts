@@ -1,4 +1,3 @@
-// app/api/monitor/route.ts
 import { checkSite } from '@/../service/statusService';
 
 export async function GET(request: Request) {
