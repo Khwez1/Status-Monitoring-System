@@ -3,8 +3,8 @@ import prisma from "@/db/prisma";
 import { createIncident, resolveIncident } from "./incidentService";
 import { sendEmail } from "./emailService";
 
-const MONITOR_URL = "https://httpstat.us/200?sleep=2000";
-const DEGRADED_THRESHOLD_MS = 1000;
+const MONITOR_URL = "https://httpbin.org/delay/2";
+const DEGRADED_THRESHOLD_MS = 100;
 
 export async function checkSite() {
   let currentStatus: "OPERATIONAL" | "DEGRADED" | "DOWN" = "OPERATIONAL";
