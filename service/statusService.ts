@@ -3,13 +3,14 @@ import prisma from "@/db/prisma";
 import { createIncident, resolveIncident } from "./incidentService";
 import { sendEmail } from "./emailService";
 
-const MONITOR_URL = "https://httpbin.org/delay/2";
-const DEGRADED_THRESHOLD_MS = 100;
+const MONITOR_URL = "https://paveer.com";
+const DEGRADED_THRESHOLD_MS = 1000;
 
 export async function checkSite() {
   let currentStatus: "OPERATIONAL" | "DEGRADED" | "DOWN" = "OPERATIONAL";
   let httpStatus = 0;
   let latencyMs = 0;
+  let checkOk = false;
 
   try {
     const start = Date.now();
@@ -21,6 +22,7 @@ export async function checkSite() {
     });
     latencyMs = Date.now() - start;
     httpStatus = res.status;
+    checkOk = res.ok
 
     if (!res.ok) {
       currentStatus = "DOWN";
@@ -37,7 +39,7 @@ export async function checkSite() {
       url: MONITOR_URL,
       status: httpStatus,
       latencyMs,
-      ok: currentStatus === "OPERATIONAL",
+      ok: checkOk,
       checkedAt: new Date(),
     },
   });
